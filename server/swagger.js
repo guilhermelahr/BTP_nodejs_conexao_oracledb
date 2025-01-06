@@ -6,9 +6,9 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Node-Oracle Service API',
+      title: 'Oracle Service API',
       version: '1.0.0',
-      description: 'API para execução de procedures em um banco Oracle',
+      description: 'API for executing commands in an Oracle database',
     }
   },
   apis: ['./server.js', './routes/**/*.js'],
@@ -16,7 +16,7 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// Função que retorna o middleware do Swagger
+// Function that returns the Swagger middleware
 function setupSwagger(app) {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 }

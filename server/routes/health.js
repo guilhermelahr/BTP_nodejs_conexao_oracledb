@@ -5,13 +5,13 @@ const router = express.Router();
  * @swagger
  * /health:
  *   get:
- *     summary: Verifica o estado do serviço
+ *     summary: Checks the service status
  *     responses:
  *       200:
- *         description: Serviço está rodando
+ *         description: Service is running
  */
 router.get('/', (req, res) => {
-  console.info('Healthcheck solicitado');
+  console.info('Healthcheck requested');
   res.status(200).send({ status: 'OK', message: 'Service is running' });
 });
 

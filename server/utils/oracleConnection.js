@@ -2,7 +2,7 @@ const oracledb = require('oracledb');
 
 function generateOracleConnectionString(simpleUri) {
 
-  console.info(`Gerando string de conexão Oracle para URI: ${simpleUri}`);
+  console.info(`Generating Oracle connection string for URI: ${simpleUri}`);
 
   const [hostPort, serviceName] = simpleUri.split('/');
   const [host, port] = hostPort.split(':');
@@ -14,7 +14,7 @@ async function executeOracleProcedure(dbcon, procedureName, params) {
 
   const connectString = generateOracleConnectionString(dbcon.uri);
 
-  console.info(`Conectando ao banco Oracle: ${connectString}`);
+  console.info(`Connecting to Oracle database: ${connectString}`);
 
   const connection = await oracledb.getConnection({
     connectString: connectString,
@@ -28,7 +28,7 @@ async function executeOracleProcedure(dbcon, procedureName, params) {
     bindParams[key] = { dir: oracledb.BIND_IN, val: params[key] };
   }
 
-  console.info(`Executando procedure ${procedureName}`);
+  console.info(`Executing procedure ${procedureName}`);
 
   const result = await connection.execute(
     `BEGIN ${procedureName}(${Object.keys(params).map(param => ':' + param).join(', ')}); END;`,
@@ -36,9 +36,28 @@ async function executeOracleProcedure(dbcon, procedureName, params) {
   );
 
   await connection.close();
-  console.info('Conexão Oracle encerrada com sucesso');
+  console.info('Oracle connection closed successfully');
   return result;
   
 }
 
-module.exports = { generateOracleConnectionString, executeOracleProcedure };
+async function testOracleConnection(dbcon) {
+
+  const connectString = generateOracleConnectionString(dbcon.uri);
+
+  console.info(`Connecting to Oracle database: ${connectString}`);
+
+  const connection = await oracledb.getConnection({
+    connectString: connectString,
+    user: dbcon.username,
+    password: dbcon.pass,
+  });
+
+  await connection.close();
+
+  console.info('Oracle connection closed successfully');
+  return result;
+  
+}
+
+module.exports = { generateOracleConnectionString, executeOracleProcedure, testOracleConnection };

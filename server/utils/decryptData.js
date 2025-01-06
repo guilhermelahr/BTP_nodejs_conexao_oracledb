@@ -3,13 +3,13 @@ const { DateTime } = require('luxon');
 
 function decryptData(encryptedData, timestamp, ivBase64) {
 
-  console.info('Iniciando processo de descriptografia');
+  console.info('Starting decryption process');
 
   const sharedPassword = process.env.PASS;
 
   if (!sharedPassword) {
-    console.error("A variável de ambiente 'PASS' não está definida.");
-    throw new Error("A variável de ambiente 'PASS' não está definida.");
+    console.error("The environment variable 'PASS' is not defined.");
+    throw new Error("The environment variable 'PASS' is not defined.");
   }
 
   const salt1 = Buffer.from([142, 67, 58, 199, 73, 24, 123, 187, 214, 52, 134, 28, 84, 63, 198, 110, 167]);
@@ -28,7 +28,7 @@ function decryptData(encryptedData, timestamp, ivBase64) {
   let decryptedData = decipher.update(encryptedBuffer, "binary", "utf8");
   decryptedData += decipher.final("utf8");
 
-  console.info('Descriptografia concluída com sucesso');
+  console.info('Decryption process completed successfully');
 
   return decryptedData;
 
