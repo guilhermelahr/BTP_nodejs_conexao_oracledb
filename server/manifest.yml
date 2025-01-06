@@ -1,0 +1,10 @@
+applications:
+  - name: node-oracle-app
+    memory: 256M
+    buildpacks:
+      - nodejs_buildpack
+    #env:
+     # pass: ""
+    services:
+      - oracle-db-app-xsuaa
+      - oracle-db-app-autoscaler

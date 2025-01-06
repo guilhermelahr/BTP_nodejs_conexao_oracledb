@@ -1,0 +1,19 @@
+#cf push -f manifest.yml -p . -v SUBDOMAIN=<subdominio-desejado> -v REGION=<região-desejada>
+applications:
+  - name: approuter-node-oracle
+    memory: 128M
+    buildpacks:
+      - nodejs_buildpack
+    routes:
+      - route: approuter-node-oracle.cfapps.us10-001.hana.ondemand.com
+    env:
+      destinations: >
+        [
+          {
+            "name":"node-backend",
+            "url":"https://node-oracle-app.cfapps.us10-001.hana.ondemand.com",
+            "forwardAuthToken": true
+          }
+        ]
+    services:
+      - oracle-db-app-xsuaa

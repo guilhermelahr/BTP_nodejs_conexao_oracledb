@@ -1,0 +1,32 @@
+{
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/$",
+      "target": "/api-docs",
+      "authenticationType": "xsuaa",
+      "destination": "node-backend"
+    },
+    {
+      "source": "^/procedure",
+      "target": "/procedure", 
+      "authenticationType": "xsuaa",
+      "destination": "node-backend"
+    },
+    {
+      "source": "^/health",
+      "target": "/health",  
+      "authenticationType": "xsuaa",
+      "destination": "node-backend"
+    },
+    {
+      "source": "^/api-docs",
+      "target": "/api-docs",
+      "authenticationType": "xsuaa",
+      "destination": "node-backend"
+    }
+  ]
+}
+
+
+  
