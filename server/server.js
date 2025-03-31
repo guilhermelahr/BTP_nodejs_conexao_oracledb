@@ -7,6 +7,7 @@ const setupSwagger = require('./swagger');
 const healthRoutes = require('./routes/health');
 const procedureRoutes = require('./routes/procedure');
 const testConRoutes = require('./routes/testConnection');
+const testScaling = require('./routes/testScaling');
 const errorHandler = require('./middleware/errorHandler');
 
 xsenv.loadEnv();
@@ -16,14 +17,15 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 
 // Security configuration
-//passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({ uaa: { tag: 'xsuaa' } }).uaa));
-//app.use(passport.initialize());
-//app.use(passport.authenticate('JWT', { session: false }));
+passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({ uaa: { tag: 'xsuaa' } }).uaa));
+app.use(passport.initialize());
+app.use(passport.authenticate('JWT', { session: false }));
 
 // Routes
 app.use('/health', healthRoutes);
 app.use('/procedure', procedureRoutes);
 app.use('/testConnection', testConRoutes);
+app.use('/scaling', testScaling);
 
 // Swagger
 setupSwagger(app);

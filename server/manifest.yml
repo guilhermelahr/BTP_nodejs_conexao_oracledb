@@ -3,6 +3,8 @@ applications:
     memory: 256M
     buildpacks:
       - nodejs_buildpack
+    routes:
+      - route: node-oracle-app-poc123.cfapps.us10-001.hana.ondemand.com
     #env:
      # pass: ""
     services:
